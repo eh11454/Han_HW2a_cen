@@ -1,9 +1,9 @@
 //This program takes in as input an angle in degrees between -360 to 360
-//It will then calculate the derivative of sine using the forward difference formula
+//It will then calculate the derivative of sine using the central difference formula
 
 #include <iostream>  
 #include <stdio.h>       
-#include <math.h>  
+#include <math.h> 
 using namespace std;
 
 
@@ -38,6 +38,7 @@ int main() {
 	//Outputs
 	//-------------------------------------------------------
 	cout << "The derivative of sin x for the angle " << x << " is " << fp(x);
+	
 
 	return 0;
 }
@@ -54,7 +55,11 @@ double f(double x) {
 double fp(double x) {
 	double angle = (x * PI) / 180; //Conversion to radians
 
-
-	return (f(angle + h) - f(angle)) / h;
-
+	return (f(angle + h) - f(angle - h)) / (2 * h);
 }
+
+//****************************************************************
+//It should be noted that I am using Degrees not Radians
+//However, while using 90deg in the Central Difference program, the derivate was 0.0000000000
+//The Forward Difference program gave me a derivative of 0.0000250000
+//Clearly the Central Difference formula was more precise
